@@ -79,3 +79,37 @@ A comprehensive Web API designed for managing projects, tasks, and comments, wit
 
 #### **Outcome**
 Delivered a scalable and secure Web API for managing projects and tasks, prioritizing performance, maintainability, and collaboration.  
+
+# Project Management System API Documentation
+
+This project includes Postman Collections for testing API endpoints. You can download the collections and import them into Postman for testing.
+
+## Available Collections:
+
+1. **Comments API Collection**  
+   [Download Comments Collection](https://raw.githubusercontent.com/AhmedShawky02/Project-Management-System/main/postman_docs/Comments.postman_collection.json)
+
+2. **Projects API Collection**  
+   [Download Projects Collection](https://raw.githubusercontent.com/AhmedShawky02/Project-Management-System/main/postman_docs/Projects.postman_collection.json)
+
+3. **Tasks API Collection**  
+   [Download Tasks Collection](https://raw.githubusercontent.com/AhmedShawky02/Project-Management-System/main/postman_docs/Tasks.postman_collection.json)
+
+4. **User Management API Collection**  
+   [Download User Management Collection](https://raw.githubusercontent.com/AhmedShawky02/Project-Management-System/main/postman_docs/User%20Management.postman_collection.json)
+
+---
+
+## How to Use:
+
+1. **Download the desired collection** from the links above.
+2. Open Postman.
+3. Click on the "Import" button in the top left corner.
+4. Select the downloaded JSON file and import it.
+5. Start testing the API endpoints.
+
+---
+
+## Notes:
+- Ensure you have the correct authentication tokens to access the endpoints.
+
