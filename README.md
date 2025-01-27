@@ -87,7 +87,7 @@ This project includes Postman Collections for testing API endpoints. You can dow
 ## Available Collections:
 
 1. **Comments API Collection**  
-   [Download Comments Collection](https://raw.githubusercontent.com/AhmedShawky02/Project-Management-System/main/postman_docs/Comments.postman_collection.json)
+   [Download Comments Collection](https://github.com/AhmedShawky02/Project-Management-System/raw/main/postman_docs/Comments.postman_collection.json)
 
 2. **Projects API Collection**  
    [Download Projects Collection](https://github.com/AhmedShawky02/Project-Management-System/raw/main/postman_docs/Comments.postman_collection.json?raw=true)
