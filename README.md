@@ -90,7 +90,7 @@ This project includes Postman Collections for testing API endpoints. You can dow
    [Download Comments Collection](https://raw.githubusercontent.com/AhmedShawky02/Project-Management-System/main/postman_docs/Comments.postman_collection.json)
 
 2. **Projects API Collection**  
-   [Download Projects Collection](https://raw.githubusercontent.com/AhmedShawky02/Project-Management-System/main/postman_docs/Projects.postman_collection.json)
+   [Download Projects Collection](https://github.com/AhmedShawky02/Project-Management-System/raw/main/postman_docs/Comments.postman_collection.json)
 
 3. **Tasks API Collection**  
    [Download Tasks Collection](https://raw.githubusercontent.com/AhmedShawky02/Project-Management-System/main/postman_docs/Tasks.postman_collection.json)
