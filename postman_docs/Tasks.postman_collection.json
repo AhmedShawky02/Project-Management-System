@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "e3dcb151-8eed-48ff-b7d1-c424ccdf5f15",
+		"name": "Tasks",
+		"description": "### **About the Tasks Collection**\n\nThe **Tasks Collection** is a set of API endpoints designed to manage tasks within the **Project Management System**. These endpoints allow authenticated users to create, read, update, and delete tasks while ensuring proper validation and authorization. Each task is associated with a project and can include essential details such as a name, description, due date, status, and assigned user.\n\n---\n\n### **Key Features**:\n\n1. **Task Management**:\n    \n    - Create new tasks and associate them with projects.\n        \n    - Update task details, including name, description, due date, status, and project association.\n        \n    - Retrieve individual or all tasks for detailed management.\n        \n    - Delete tasks after ensuring no associated comments exist.\n        \n2. **Validation**:\n    \n    - Ensures that the due date is not set in the past.\n        \n    - Validates the task status to be one of the predefined values (1: Complete, 2: In Progress, 3: Pending).\n        \n    - Checks for the existence of the associated project and task before performing operations.\n        \n3. **Authorization**:\n    \n    - All endpoints require user authentication via Bearer Token.\n        \n    - Ensures only authenticated users can interact with the system.\n        \n4. **Error Handling**:\n    \n    - Provides detailed error messages for invalid requests, missing data, or server issues.\n        \n    - Handles edge cases, such as attempting to delete a task with associated comments.\n        \n\n---\n\n### **Purpose**:\n\nThe Tasks Collection is an integral part of the Project Management System, enabling efficient task tracking and management for projects. It facilitates collaboration by assigning tasks to users and keeping projects on track through due dates and statuses.\n\n---\n\n### **Endpoints Overview**:\n\n- **Create Task**: Adds a new task to the system.\n    \n- **Get All Tasks**: Retrieves a list of all tasks in the system.\n    \n- **Get Task by ID**: Fetches details of a specific task by its unique ID.\n    \n- **Update Task**: Updates an existing task's details.\n    \n- **Delete Task**: Deletes a task after ensuring no associated comments exist.\n    \n\n---\n\n### **Authentication**:\n\nAll endpoints in this collection are protected and require a valid **Bearer Token** for access. Unauthorized users cannot interact with the system, ensuring data security and user privacy.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40788958"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc5MDI2NzYsImV4cCI6MTczNzkwNjI3NiwiaWF0IjoxNzM3OTAyNjc2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.0MfxDS3b93qBk31qIErmgwxIeJeKSJ9MNuzyMJYmkKg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Tasks/Create",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Tasks",
+						"Create"
+					]
+				},
+				"description": "### **1\\. Add New Task**\n\n### **Description**:\n\nThis endpoint is used to create a new task and associate it with a specific project. The user must be authenticated to access this endpoint.\n\n- **HTTP Method**: `POST`\n    \n- **URL**: `/api/Tasks/Create`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n\n### **Request Body**:\n\nThe request must include the following fields in JSON format:\n\n``` json\n{\n  \"name\": \"string\",           // The name of the task.\n  \"description\": \"string\",    // A description of the task.\n  \"dueDate\": \"2025-01-01T00:00:00Z\", // The due date of the task (cannot be in the past).\n  \"projectId\": 0              // The ID of the project the task belongs to.\n}\n\n ```\n\n### **Responses**:\n\n- **200 OK**: The task was successfully created.\n    \n\nExample:\n\n``` json\n{\n  \"TaskId\": 1,\n  \"Message\": \"Task created successfully\"\n}\n\n ```\n\n- **400 Bad Request**: The input data is invalid (e.g., missing fields, invalid format, or due date in the past).\n    \n- **404 Not Found**: The specified project does not exist.\n    \n- **401 Unauthorized**: The user is not authenticated or cannot be found.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "Get All",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc5NzM1OTYsImV4cCI6MTczNzk3NzE5NiwiaWF0IjoxNzM3OTczNTk2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.mLLm9v0gJHTgBIWlJD2PkZTdsmZi7bKZ_ex9NB-n9t0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Tasks/GetAll",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Tasks",
+						"GetAll"
+					]
+				},
+				"description": "### **2\\. Get All Tasks**\n\n### **Description**:\n\nThis endpoint retrieves all tasks from the database. The user must be authenticated to access it.\n\n- **HTTP Method**: `GET`\n    \n- **URL**: `/api/Tasks/GetAll`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n\n### **Responses**:\n\n- **200 OK**: A list of all tasks is returned.\n    \n\nExample:\n\n``` json\n[\n  {\n    \"taskId\": 2,\n    \"name\": \"Task Name\",\n    \"description\": \"Task description\",\n    \"status\": 3,\n    \"dueDate\": \"2025-01-01T00:00:00Z\",\n    \"projectId\": 2,\n    \"assignedTo\": 4,\n    \"comments\": []\n  }\n]\n\n ```\n\n- **404 Not Found**: No tasks exist in the database.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "Get By id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc5NzM1OTYsImV4cCI6MTczNzk3NzE5NiwiaWF0IjoxNzM3OTczNTk2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.mLLm9v0gJHTgBIWlJD2PkZTdsmZi7bKZ_ex9NB-n9t0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Tasks/1",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Tasks",
+						"1"
+					]
+				},
+				"description": "StartFragment\n\n### **3\\. Get Task by ID**\n\n### **Description**:\n\nThis endpoint retrieves a specific task based on its ID. The user must be authenticated to access it.\n\n- **HTTP Method**: `GET`\n    \n- **URL**: `/api/Tasks/{id}`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n- **Path Parameter**:\n    \n    - `id` (int): The unique ID of the task to retrieve.\n        \n\n### **Responses**:\n\n- **200 OK**: The task is successfully retrieved.\n    \n\nExample:\n\n``` json\n{\n  \"taskId\": 1,\n  \"name\": \"Task Name\",\n  \"description\": \"Task description\",\n  \"status\": 2,\n  \"dueDate\": \"2025-01-01T00:00:00Z\",\n  \"projectId\": 2,\n  \"assignedTo\": 4,\n  \"comments\": []\n}\n\n ```\n\n- **404 Not Found**: The task with the specified ID does not exist.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc4MTA3MDMsImV4cCI6MTczNzgxNDMwMywiaWF0IjoxNzM3ODEwNzAzLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.SG7PhQpm4bXHRpg-xPkl4Kq_hEEyOK02YO6mLXG1Dbo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Name\": \"Fix login bug\",\r\n  \"Description\": \"Resolve the issue where users are unable to log in after the latest update.\",\r\n  \"Status\": 2,\r\n  \"DueDate\": \"2025-02-10T15:30:00\",\r\n  \"ProjectId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Tasks/1",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Tasks",
+						"1"
+					]
+				},
+				"description": "### **4\\. Update Task**\n\n### **Description**:\n\nThis endpoint updates the details of an existing task. The user must be authenticated to access it.\n\n- **HTTP Method**: `PUT`\n    \n- **URL**: `/api/Tasks/{id}`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n- **Path Parameter**:\n    \n    - `id` (int): The unique ID of the task to update.\n        \n\n### **Request Body**:\n\nThe request must include the following fields in JSON format:\n\n``` json\n{\n  \"name\": \"Updated Task Name\",\n  \"description\": \"Updated Task Description\",\n  \"status\": 2,                 // Task status (1: Complete, 2: In Progress, 3: Pending).\n  \"dueDate\": \"2025-02-01T00:00:00Z\", // The updated due date (cannot be in the past).\n  \"projectId\": 2               // The ID of the project the task belongs to.\n}\n\n ```\n\n### **Responses**:\n\n- **200 OK**: The task was successfully updated.\n    \n\nExample:\n\n``` json\n{\n  \"Message\": \"Task updated successfully.\"\n}\n\n ```\n\n- **400 Bad Request**: The input data is invalid (e.g., invalid status, due date in the past).\n    \n- **404 Not Found**: The task or project with the specified ID does not exist.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc5MDI2NzYsImV4cCI6MTczNzkwNjI3NiwiaWF0IjoxNzM3OTAyNjc2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.0MfxDS3b93qBk31qIErmgwxIeJeKSJ9MNuzyMJYmkKg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Tasks/1",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Tasks",
+						"1"
+					]
+				},
+				"description": "### **5\\. Delete Task**\n\n### **Description**:\n\nThis endpoint deletes a specific task based on its ID. Before deleting a task, all associated comments must be deleted. The user must be authenticated to access it.\n\n- **HTTP Method**: `DELETE`\n    \n- **URL**: `/api/Tasks/{id}`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n- **Path Parameter**:  \n    \n    - `id` (int): The unique ID of the task to delete.\n        \n\n### **Responses**:\n\n- **200 OK**: The task was successfully deleted.\n    \n\nExample:\n\n``` json\n{\n  \"Message\": \"Task deleted successfully.\"\n}\n\n ```\n\n- **400 Bad Request**: The task has associated comments that must be deleted first.\n    \n- **404 Not Found**: The task with the specified ID does not exist.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		}
+	]
+}

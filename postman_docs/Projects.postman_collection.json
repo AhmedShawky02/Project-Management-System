@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "ea8a2bf9-d9f6-4b78-8319-6c5bf840cd4f",
+		"name": "Projects",
+		"description": "### **About the Projects API Collection**\n\nThe **Projects API Collection** provides a set of endpoints to manage projects in the **Project Management System**. It allows authenticated users to perform CRUD (Create, Read, Update, Delete) operations on projects while ensuring data integrity and validation. This API is designed for use by project managers, team members, and administrators to streamline project workflows.\n\n---\n\n### **Key Features**\n\n1. **Authentication and Authorization**:\n    \n    All endpoints require a valid Bearer Token to ensure secure access. Only authenticated users can interact with the API.\n    \n2. **Project Management**:\n    \n    - Create new projects with essential details like name, description, start date, and end date.\n        \n    - Retrieve all projects or fetch specific project details by ID.\n        \n    - Update existing project details, including name, description, and status.\n        \n    - Delete projects, ensuring that no associated tasks exist.\n        \n3. **Validation**:\n    \n    - Start date must always precede the end date.\n        \n    - Start date cannot be in the past when creating or updating a project.\n        \n    - Projects cannot be deleted if they have associated tasks, ensuring data consistency.\n        \n4. **Error Handling**:\n    \n    The API provides clear and descriptive error messages for invalid inputs, unauthorized access, and unexpected server errors.\n    \n\n---\n\n### **How to Use This Collection**\n\n1. **Authentication**:\n    \n    Ensure you have a valid Bearer Token before using any endpoint. Include the token in the `Authorization` header of each request:\n    \n\n```\nAuthorization: Bearer <your-token>\n\n ```\n\n1. **Endpoints Overview**:  \n    \n    - **Create Project**: Add a new project to the system.\n        \n    - **Get All Projects**: Retrieve a list of all projects.\n        \n    - **Get Project by ID**: Fetch details of a specific project using its ID.\n        \n    - **Update Project**: Modify details of an existing project.\n        \n    - **Delete Project**: Remove a project, provided it has no associated tasks.\n        \n2. **Input and Output**:  \n    \n    - Use JSON format for request bodies.\n        \n    - Responses will also be in JSON format, containing data or error messages.\n        \n\n---\n\n### **Intended Users**\n\nThis API is designed for:\n\n- **Project Managers**: To create and manage projects.\n    \n- **Team Members**: To view project details and statuses.\n    \n- **Administrators**: To maintain data integrity and oversee project-related operations.\n    \n\n---\n\n### **Example Use Cases**\n\n1. A project manager creates a new project with specific start and end dates.\n    \n2. A team member retrieves the list of active projects to understand their tasks.\n    \n3. An administrator updates a project's details to reflect changes in scope or timeline.\n    \n4. A project is deleted after all associated tasks are completed or removed.\n    \n\n---\n\n### **Notes**\n\n- Ensure proper date formatting (e.g., `YYYY-MM-DD`) when working with start and end dates.\n    \n- Handle errors gracefully by checking the response status codes and messages.\n    \n- Always delete tasks associated with a project before attempting to delete the project itself.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40788958"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc4MDA5MzAsImV4cCI6MTczNzgwNDUzMCwiaWF0IjoxNzM3ODAwOTMwLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.D_ghDr8jRSicEJGP-qIuCPM7fwOmMb-EyFvIdMtYDAo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Projects/Create",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Projects",
+						"Create"
+					]
+				},
+				"description": "### **1\\. Add New Project**\n\n### **Description**:\n\nThis endpoint is used to create a new project. The user must be authenticated, and certain validations are performed (e.g., start date must be before the end date).\n\n- **HTTP Method**: `POST`\n    \n- **URL**: `/api/Projects/Create`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n\n### **Request Body**:\n\nThe request must include the following fields in JSON format:\n\n``` json\n{\n  \"name\": \"string\",            // The name of the project.\n  \"description\": \"string\",     // A brief description of the project.\n  \"startDate\": \"2023-01-01\",   // The project's start date (must not be in the past).\n  \"endDate\": \"2023-12-31\"      // The project's end date (must be after the start date).\n}\n\n ```\n\n### **Responses**:\n\n- **200 OK**: The project was successfully created.\n    \n\nExample:\n\n``` json\n{\n  \"ProjectId\": 1,\n  \"Message\": \"Project created successfully\"\n}\n\n ```\n\n- **400 Bad Request**: Invalid input (e.g., start date in the past or start date >= end date).\n    \n- **401 Unauthorized**: The user is not authenticated or cannot be found.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "Get All",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc5NzM1OTYsImV4cCI6MTczNzk3NzE5NiwiaWF0IjoxNzM3OTczNTk2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.mLLm9v0gJHTgBIWlJD2PkZTdsmZi7bKZ_ex9NB-n9t0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Projects/GetAll",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Projects",
+						"GetAll"
+					]
+				},
+				"description": "### **2\\. Get All Projects**\n\n### **Description**:\n\nThis endpoint retrieves all projects from the database. The user must be authenticated to access it.\n\n- **HTTP Method**: `GET`\n    \n- **URL**: `/api/Projects/GetAll`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n\n### **Responses**:\n\n- **200 OK**: A list of all projects is returned.\n    \n\nExample:\n\n``` json\n[\n  {\n    \"projectId\": 1,\n    \"name\": \"Project A\",\n    \"description\": \"Description of Project A\",\n    \"startDate\": \"2023-01-01\",\n    \"endDate\": \"2023-12-31\",\n    \"status\": \"In Progress\",\n    \"tasks\": []\n  }\n]\n\n ```\n\n- **404 Not Found**: No projects exist in the database.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "Get By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc5NzM1OTYsImV4cCI6MTczNzk3NzE5NiwiaWF0IjoxNzM3OTczNTk2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.mLLm9v0gJHTgBIWlJD2PkZTdsmZi7bKZ_ex9NB-n9t0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Projects/2",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Projects",
+						"2"
+					]
+				},
+				"description": "### **3\\. Get Project by ID**\n\n### **Description**:\n\nThis endpoint retrieves a specific project based on its ID. The user must be authenticated to access it.\n\n- **HTTP Method**: `GET`\n    \n- **URL**: `/api/Projects/{id}`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n- **Path Parameter**:  \n    \n    - `id` (int): The unique ID of the project to retrieve.\n        \n\n### **Responses**:\n\n- **200 OK**: The project is successfully retrieved.\n    \n\nExample:\n\n``` json\n{\n  \"projectId\": 1,\n  \"name\": \"Project A\",\n  \"description\": \"Description of Project A\",\n  \"startDate\": \"2023-01-01\",\n  \"endDate\": \"2023-12-31\",\n  \"status\": \"In Progress\",\n  \"tasks\": []\n}\n\n ```\n\n- **404 Not Found**: The project with the specified ID does not exist.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5NSIsImVtYWlsIjoiQWhtZWRTaGF3a3k1QGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc3NDIzMTcsImV4cCI6MTczNzc0NTkxNywiaWF0IjoxNzM3NzQyMzE3LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.SSh_BeKQcgrQ0CYrowqA-LuvnFcZH9SEDBGsQqU6yGU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Projects/1",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Projects",
+						"1"
+					]
+				},
+				"description": "### **4\\. Update Project**\n\n### **Description**:\n\nThis endpoint updates the details of an existing project. The user must be authenticated to access it.\n\n- **HTTP Method**: `PUT`\n    \n- **URL**: `/api/Projects/{id}`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n- **Path Parameter**:\n    \n    - `id` (int): The unique ID of the project to update.\n        \n\n### **Request Body**:\n\nThe request must include the following fields in JSON format:\n\n``` json\n{\n  \"name\": \"Updated Project Name\",  // The updated project name.\n  \"description\": \"Updated Description\",  // The updated project description.\n  \"startDate\": \"2023-02-01\",  // The updated start date.\n  \"endDate\": \"2023-12-31\",    // The updated end date.\n  \"statusId\": 2               // The updated status ID (e.g., 1 = Not Started, 2 = In Progress, 3 = Completed).\n}\n\n ```\n\n### **Responses**:\n\n- **200 OK**: The project was successfully updated.\n    \n\nExample:\n\n``` json\n{\n  \"Message\": \"Project updated successfully.\"\n}\n\n ```\n\n- **400 Bad Request**: Invalid input (e.g., start date >= end date).\n    \n- **404 Not Found**: The project with the specified ID does not exist.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc5MDI2NzYsImV4cCI6MTczNzkwNjI3NiwiaWF0IjoxNzM3OTAyNjc2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.0MfxDS3b93qBk31qIErmgwxIeJeKSJ9MNuzyMJYmkKg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Projects/3",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Projects",
+						"3"
+					]
+				},
+				"description": "### **5\\. Delete Project**\n\n### **Description**:\n\nThis endpoint deletes a specific project based on its ID. Before deletion, it ensures that the project has no associated tasks. The user must be authenticated to access it.\n\n- **HTTP Method**: `DELETE`\n    \n- **URL**: `/api/Projects/{id}`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n- **Path Parameter**:  \n    \n    - `id` (int): The unique ID of the project to delete.\n        \n\n### **Responses**:\n\n- **200 OK**: The project was successfully deleted.\n    \n\nExample:\n\n``` json\n{\n  \"Message\": \"Project deleted successfully.\"\n}\n\n ```\n\n- **400 Bad Request**: The project has associated tasks that must be deleted first.\n    \n\nExample:\n\n``` json\n{\n  \"Message\": \"Please delete all Tasks associated with this project before deleting the project.\"\n}\n\n ```\n\n- **404 Not Found**: The project with the specified ID does not exist.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		}
+	]
+}

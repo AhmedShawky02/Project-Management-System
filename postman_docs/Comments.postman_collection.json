@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "c9f0394f-5e14-48a9-b647-d44718c5ceb3",
+		"name": "Comments",
+		"description": "### **Comments Collection Description**\n\nThe **Comments** collection stores all the comments related to tasks within the system. Each comment is associated with a specific task and contains details such as the comment text, the user who created it, and the timestamp of when it was created.\n\n---\n\n### **Fields**:\n\n1. **CommentId** (int):\n    \n    1. The unique identifier for each comment. It is generated automatically by the database and serves as the primary key for the comment.\n        \n2. **Text** (string):\n    \n    1. The content of the comment. This is the actual text that the user writes as a comment on a task.\n        \n3. **CreatedAt** (DateTime):\n    \n    1. The timestamp indicating when the comment was created. This helps track when the comment was added to the system.\n        \n4. **TaskId** (int):\n    \n    1. The ID of the task that the comment is associated with. This creates a relationship between the comment and the task, allowing the system to know which task the comment is referring to.\n        \n5. **CreatedBy** (int):\n    \n    1. The ID of the user who created the comment. This field links the comment to the user who posted it, allowing the system to track which user made the comment.\n        \n\n---\n\n### **Relationships**:\n\n- The **TaskId** field links each comment to a specific task in the **Tasks** collection.\n    \n- The **CreatedBy** field links the comment to a user in the **Users** collection, ensuring that only authenticated users can create, update, or delete comments.\n    \n\n---\n\n### **Usage**:\n\n- Comments are used to provide additional context, feedback, or communication related to a task.\n    \n- The collection is essential for tracking discussions and updates on tasks, allowing team members to collaborate and share information effectively.\n    \n\n---\n\n### **Indexes**:\n\n- **CommentId**: Indexed for fast retrieval and lookups of specific comments.\n    \n- **TaskId**: Indexed to quickly fetch all comments related to a specific task.\n    \n- **CreatedBy**: Indexed to allow querying of all comments made by a specific user.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40788958"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc5MDI2NzYsImV4cCI6MTczNzkwNjI3NiwiaWF0IjoxNzM3OTAyNjc2LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.0MfxDS3b93qBk31qIErmgwxIeJeKSJ9MNuzyMJYmkKg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Comments/Create",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Comments",
+						"Create"
+					]
+				},
+				"description": "### **1\\. Add New Comment**\n\n### **Description**:\n\nThis endpoint is used to create a new comment and associate it with a specific task. The user must be authenticated to access this endpoint.\n\n- **HTTP Method**: `POST`\n    \n- **URL**: `/api/Comments/Create`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n\n### **Request Body**:\n\nThe request must include the following fields in JSON format:\n\n``` json\n{\n  \"text\": \"string\",      // The content of the comment.\n  \"taskId\": 0           // The ID of the task to which the comment belongs.\n}\n\n ```\n\n### **Responses**:\n\n- **200 OK**: The comment was successfully created\n    \n\nExample:\n\n``` json\n{\n  \"CommentId\": 1,\n  \"Message\": \"Comment created successfully.\"\n}\n\n ```\n\n- **400 Bad Request**: The input data is invalid (e.g., missing required fields or invalid format).\n    \n- **404 Not Found**: The specified task does not exist.\n    \n- **401 Unauthorized**: The user is not authenticated or cannot be found.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "Get All",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc4OTg2NzksImV4cCI6MTczNzkwMjI3OSwiaWF0IjoxNzM3ODk4Njc5LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.UTw2pXmrX9YxSC3AFlPJbhg2TcZUVigfgtjW3Pe-ZDs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Comments/GetAll",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Comments",
+						"GetAll"
+					]
+				},
+				"description": "### **2\\. Get All Comments**\n\n### **Description**:\n\nThis endpoint retrieves all comments from the database. The user must be authenticated to access it.\n\n- **HTTP Method**: `GET`\n    \n- **URL**: `/api/Comments/GetAll`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n\n### **Responses**:\n\n- **200 OK**: A list of all comments is returned.\n    \n\nExample:\n\n``` json\n[\n  {\n    \"commentId\": 1,\n    \"text\": \"This is a comment.\",\n    \"createdAt\": \"2023-01-01T00:00:00Z\",\n    \"taskId\": 5,\n    \"createdBy\": \"User123\"\n  }\n]\n\n ```\n\n- **404 Not Found**: No comments exist in the database.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "Get By Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc4OTg2NzksImV4cCI6MTczNzkwMjI3OSwiaWF0IjoxNzM3ODk4Njc5LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.UTw2pXmrX9YxSC3AFlPJbhg2TcZUVigfgtjW3Pe-ZDs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Comments/3",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Comments",
+						"3"
+					]
+				},
+				"description": "### **3\\. Get Comment by ID**\n\n### **Description**:\n\nThis endpoint retrieves a specific comment based on its ID. The user must be authenticated to access it.\n\n- **HTTP Method**: `GET`\n    \n- **URL**: `/api/Comments/{id}`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n- **Path Parameter**:\n    \n    - `id` (int): The unique ID of the comment to retrieve.\n        \n\n### **Responses**:\n\n- **200 OK**: The comment is successfully retrieved.\n    \n\nExample:\n\n``` json\n{\n  \"commentId\": 1,\n  \"text\": \"This is a comment.\",\n  \"createdAt\": \"2023-01-01T00:00:00Z\",\n  \"taskId\": 5,\n  \"createdBy\": \"User123\"\n}\n\n ```\n\n- **400 Bad Request**: The provided ID is invalid (e.g., less than or equal to 0).\n    \n- **404 Not Found**: The comment with the specified ID does not exist.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc4OTQ2MjUsImV4cCI6MTczNzg5ODIyNSwiaWF0IjoxNzM3ODk0NjI1LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.EjePWkAGS7yLQOS9QQV0AP644quKp7ze1jIj1fguUg8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Comments/1",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Comments",
+						"1"
+					]
+				},
+				"description": "### **4\\. Update Comment**\n\n### **Description**:\n\nThis endpoint updates the content of an existing comment. The user must be authenticated to access it.\n\n- **HTTP Method**: `PUT`\n    \n- **URL**: `/api/Comments/{id}`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n- **Path Parameter**:  \n    \n    - `id` (int): The unique ID of the comment to update.\n        \n\n### **Request Body**:\n\nThe request must include the following field in JSON format:\n\n``` json\n{\n  \"text\": \"Updated comment text.\" // The new content of the comment.\n}\n\n ```\n\n### **Responses**:\n\n- **200 OK**: The comment was successfully updated.\n    \n\nExample:\n\n``` json\n{\n  \"Message\": \"Comment updated successfully.\"\n}\n\n ```\n\n- **400 Bad Request**: The input data is invalid or the provided ID is invalid.\n    \n- **404 Not Found**: The comment with the specified ID does not exist.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc4OTg2NzksImV4cCI6MTczNzkwMjI3OSwiaWF0IjoxNzM3ODk4Njc5LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.UTw2pXmrX9YxSC3AFlPJbhg2TcZUVigfgtjW3Pe-ZDs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/Comments/2",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"Comments",
+						"2"
+					]
+				},
+				"description": "### **5\\. Delete Comment**\n\n### **Description**:\n\nThis endpoint deletes a specific comment based on its ID. The user must be authenticated to access it.\n\n- **HTTP Method**: `DELETE`\n    \n- **URL**: `/api/Comments/{id}`\n    \n- **Authorization**: Requires a valid Bearer Token.\n    \n- **Path Parameter**:\n    \n    - `id` (int): The unique ID of the comment to delete.\n        \n\n### **Responses**:\n\n- **200 OK**: The comment was successfully deleted.\n    \n\nExample:\n\n``` json\n{\n  \"Message\": \"Comment deleted successfully.\"\n}\n\n ```\n\n- **404 Not Found**: The comment with the specified ID does not exist.\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server."
+			},
+			"response": []
+		}
+	]
+}

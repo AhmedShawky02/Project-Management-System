@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "93d12662-acae-4ec1-8ebf-24289ecc64f3",
+		"name": "User Management",
+		"description": "### **About User Management**\n\nThe **User Management** module in the `Project_Management_System` is responsible for handling user-related operations such as registration, authentication, and role assignment. It ensures secure and efficient management of user accounts and provides the foundation for access control and authorization within the system.\n\n---\n\n### **Key Features**:\n\n1. **User Registration**:\n    \n    - Allows new users to create an account by providing a username, email, and password.\n        \n    - Ensures that each email is unique to prevent duplicate accounts.\n        \n    - Automatically assigns a default role to new users.\n        \n2. **User Authentication**:\n    \n    - Provides a secure login mechanism where users can authenticate using their username and password.\n        \n    - Uses password hashing to ensure sensitive information is securely stored.\n        \n    - Issues a JSON Web Token (JWT) upon successful authentication, enabling secure access to protected resources.\n        \n3. **Role Management**:\n    \n    - Associates roles with users during registration or updates.\n        \n    - Supports multi-role assignments for advanced access control scenarios.\n        \n4. **Security**:\n    \n    - Passwords are hashed using a secure algorithm to prevent unauthorized access.\n        \n    - Tokens are used for session management, ensuring stateless authentication and scalability.\n        \n\n---\n\n### **Technologies Used**:\n\n- [<b>ASP.NET</b>](http://ASP.NET) **Core**: For building the RESTful API.\n    \n- **JWT (JSON Web Token)**: For authentication and authorization.\n    \n- **Password Hashing**: To securely store and verify user credentials.\n    \n- **Entity Framework**: For database interactions related to users, roles, and tokens.\n    \n\n---\n\n### **Endpoints**:\n\nThe module provides the following core endpoints:\n\n1. **Register**: Creates a new user account and assigns a default role.\n    \n2. **Login**: Authenticates an existing user and generates a token for access.\n    \n\n---\n\n### **Use Cases**:\n\n- **New User Onboarding**: Allow users to register and start using the system.\n    \n- **Access Control**: Authenticate users and restrict access to certain features based on roles.\n    \n- **Session Management**: Issue tokens to manage user sessions securely.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40788958"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/ManagementUser/register",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"ManagementUser",
+						"register"
+					]
+				},
+				"description": "StartFragment\n\n### **1\\. Register New User**\n\n### **Description**:\n\nThis endpoint is used to register a new user. It validates the input, checks for existing users with the same email, hashes the password, and assigns a default role to the user.\n\n- **HTTP Method**: `POST`\n    \n- **URL**: `/api/ManagementUser/register`\n    \n- **Authorization**: No authentication required.\n    \n\n### **Request Body**:\n\nThe request must include the following fields in JSON format:\n\n``` json\n{\n  \"userName\": \"string\",  // The desired username for the new user.\n  \"email\": \"string\",     // The email address of the user.\n  \"password\": \"string\"   // The user's password.\n}\n\n ```\n\n### **Responses**:\n\n- **200 OK**: The user was successfully registered.\n    \n\nExample:\n\n``` json\n{\n  \"userName\": \"string\",\n  \"email\": \"string\",\n  \"token\": \"string\" // JWT token for the new user.\n}\n\n ```\n\n- **400 Bad Request**:\n    \n    - Invalid input data.\n        \n    - A user with the provided email already exists.\n        \n\nExample:\n\n``` json\n{\n  \"Message\": \"User with this email already exists.\"\n}\n\n ```\n\n- **500 Internal Server Error**: An unexpected error occurred on the server.\n    \n\nExample:\n\n``` json\n{\n  \"Message\": \"Internal server error: {error details}\"\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkFobWVkU2hhd2t5MyIsImVtYWlsIjoiQWhtZWRTaGF3a3kzQGV4YW1wbGUuY29tIiwicm9sZSI6IlVzZXIiLCJuYmYiOjE3Mzc4OTg2NzksImV4cCI6MTczNzkwMjI3OSwiaWF0IjoxNzM3ODk4Njc5LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQwMDAvd2VicG9ydGFsIn0.UTw2pXmrX9YxSC3AFlPJbhg2TcZUVigfgtjW3Pe-ZDs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://projectmanagerapi.runasp.net/api/ManagementUser/Login",
+					"protocol": "http",
+					"host": [
+						"projectmanagerapi",
+						"runasp",
+						"net"
+					],
+					"path": [
+						"api",
+						"ManagementUser",
+						"Login"
+					]
+				},
+				"description": "### **2\\. Login User**\n\n### **Description**:\n\nThis endpoint allows an existing user to log in by providing their username and password. It validates the credentials and returns a token if successful.\n\n- **HTTP Method**: `POST`\n    \n- **URL**: `/api/ManagementUser/Login`\n    \n- **Authorization**: No authentication required.\n    \n\n### **Request Body**:\n\nThe request must include the following fields in JSON format:\n\n``` json\n{\n  \"userName\": \"string\",  // The username of the user.\n  \"password\": \"string\"   // The user's password.\n}\n\n ```\n\n### **Responses**:\n\n- **200 OK**: The user was successfully authenticated.\n    \n\nExample:\n\n``` json\n{\n  \"userName\": \"string\",\n  \"email\": \"string\",\n  \"token\": \"string\" // JWT token for the authenticated user.\n}\n\n ```\n\n- **401 Unauthorized**:\n    \n    - Invalid username or password.\n        \n\nExample:\n\n``` json\n{\n  \"Message\": \"Invalid email or password.\"\n}\n\n ```\n\n- **400 Bad Request**: Invalid input data (e.g., missing fields or invalid format).\n    \n- **500 Internal Server Error**: An unexpected error occurred on the server.\n    \n\nExample:\n\n``` json\n{\n  \"Message\": \"Internal server error: {error details}\"\n}\n\n ```"
+			},
+			"response": []
+		}
+	]
+}
